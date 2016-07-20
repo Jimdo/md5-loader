@@ -1,6 +1,6 @@
 {
   "name": "@jimdo/md5-loader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "returns md5 hash of a specified path",
   "main": "index.js",
   "scripts": {
