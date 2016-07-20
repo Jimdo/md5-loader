@@ -3,10 +3,7 @@
   "version": "0.1.1",
   "description": "returns md5 hash of a specified path",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Tim Sebastian @timse",
   "license": "MIT",
   "dependencies": {
     "loader-utils": "0.2.15",
