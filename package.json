@@ -9,8 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "fstream": "1.0.10",
     "loader-utils": "0.2.15",
-    "tar": "2.2.1"
+    "lucy-dirsum": "0.1.1"
   }
 }

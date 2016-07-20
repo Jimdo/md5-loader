@@ -4,9 +4,7 @@
 */
 var loaderUtils = require("loader-utils");
 var path = require('path');
-var crypto = require('crypto');
-var tar = require('tar');
-var fstream = require('fstream');
+var hash = require('lucy-dirsum');
 
 module.exports = function(content) {
     var callback = this.async();
@@ -17,20 +15,13 @@ module.exports = function(content) {
     }
     var hashTarget = path.join(process.cwd(), query.path);
 
-    var md5sum = crypto.createHash('md5');
-
-    var tarStream = fstream
-        .Reader(hashTarget)
-        .pipe(tar.Pack());
-
-    tarStream.on('data', function(d) {
-        md5sum.update(d);
-    }).on('end', function() {
-        var hashDigest = md5sum.digest('hex');
+    hash(hashTarget, function (err, hashDigest){
+        if (err) {
+            console.warn('md5 loader failed on path %s', hashTarget);
+            callback(err, '');
+            return;
+        }
         console.log('%s - md5 loader calculated hash of %s', hashDigest, hashTarget);
         callback(null, 'module.exports = "' + hashDigest + '";');
-    }).on('error', function(err) {
-        console.warn('md5 loader failed on path %s', hashTarget);
-        callback(err, '');
     });
 }
